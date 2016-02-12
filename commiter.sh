@@ -1,14 +1,22 @@
 #!/bin/bash
+
+#Settings
 dev_branch="dev-1.3.0"
+ssh_username="user"
+ssh_ip="111.111.111.111"
+ssh_path="/usr/local/var/www"
 
+#Branches
+my_branch=$(git rev-parse --abbrev-ref HEAD 2>&1)
+staged=$(git diff --name-only --cached 2>&1)
 
+#Colors
 red=$(tput setaf 1)
 green=$(tput setaf 2)
 magenta=$(tput setaf 5)
 reset=$(tput sgr0)
 
-my_branch=$(git rev-parse --abbrev-ref HEAD 2>&1)
-staged=$(git diff --name-only --cached 2>&1)
+#Other
 verbose=false
 
 for i in "$@"
@@ -52,6 +60,8 @@ then
     git push origin $dev_branch &&
     # Checkout my branch again and continue.
     git checkout $my_branch
+    #Pull dev branch on remote server
+    ssh $ssh_username@$ssh_ip 'cd '"$ssh_path"' && git pull'
 
   else
     # Stage files to index
@@ -97,7 +107,11 @@ then
     git checkout $my_branch &> /dev/null &&
       echo "Checking out $magenta$my_branch $reset..."
 
+    #Pull dev branch on remote server
+    ssh $ssh_username@$ssh_ip 'cd '"$ssh_path"' && git pull' &> /dev/null &&
+      echo "Pulling $magenta$dev_branch $reset on remote server ..."
   fi
+
 
 echo $magenta
 echo "Finished!$reset"
