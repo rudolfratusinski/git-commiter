@@ -19,6 +19,7 @@ What it does:
 - git pull origin (dev branch)
 - git push origin (dev branch)
 - git checkout (task branch)
+- ssh pull changes
 
 
 
