@@ -24,7 +24,7 @@ done
 
 echo "Type the$magenta commit$reset message:"
 read commit_message
-read -p "Your task branch is$magenta $my_branch$reset and commit message is$magenta $commit_message $reset. Do You want to continue ? [y/n] " choice
+read -p "Your task branch is$magenta $my_branch$reset, dev branch is $magenta $dev_branch$reset and commit message is$magenta $commit_message $reset. Do You want to continue ? [y/n] " choice
 
 if [[ $choice =~ ^[Yy]$ ]]
 then
