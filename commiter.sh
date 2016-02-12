@@ -1,11 +1,13 @@
 #!/bin/bash
+dev_branch="dev-1.3.0"
+
+
 red=$(tput setaf 1)
 green=$(tput setaf 2)
 magenta=$(tput setaf 5)
 reset=$(tput sgr0)
 
 my_branch=$(git rev-parse --abbrev-ref HEAD 2>&1)
-dev_branch="dev-1.3.0"
 staged=$(git diff --name-only --cached 2>&1)
 verbose=false
 
